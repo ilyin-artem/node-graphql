@@ -3,13 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.albumsResolver = void 0;
 exports.albumsResolver = {
     Query: {
-        albums: (_, { pagination }, { dataSources }) => dataSources.albumsService.getAlbums(pagination),
-        album: (_, { id }, { dataSources }) => dataSources.albumsService.getAlbum(id),
+        albums: (_, { pagination }, { dataSources }) => dataSources.albumsService.getItems(pagination),
+        album: (_, { id }, { dataSources }) => dataSources.albumsService.getItem(id),
     },
     Mutation: {
-        createAlbum: (_, { input }, { dataSources }) => dataSources.albumsService.createAlbum(input),
-        deleteAlbum: (_, { id }, { dataSources }) => dataSources.albumsService.deleteAlbum(id),
-        updateAlbum: (_, { id, input }, { dataSources }) => dataSources.albumsService.updateAlbum(id, input),
+        createAlbum: (_, { input }, { dataSources }) => dataSources.albumsService.createItem(input),
+        deleteAlbum: (_, { id }, { dataSources }) => dataSources.albumsService.deleteItem(id),
+        updateAlbum: (_, { id, input }, { dataSources }) => dataSources.albumsService.updateItem(id, input),
     },
     Album: {
         id: ({ _id }) => _id,
