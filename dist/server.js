@@ -12,11 +12,13 @@ require("dotenv/config");
 const artists_resolver_1 = require("./modules/artists/resolvers/artists.resolver");
 const bands_resolver_1 = require("./modules/bands/resolvers/bands.resolver");
 const albums_resolver_1 = require("./modules/albums/resolvers/albums.resolver");
-const geners_resolver_1 = require("./modules/genres/resolvers/geners.resolver");
+const genres_resolver_1 = require("./modules/genres/resolvers/genres.resolver");
+const tracks_resolver_1 = require("./modules/tracks/resolvers/tracks.resolver");
 const artists_service_1 = require("./modules/artists/services/artists.service");
 const bands_service_1 = require("./modules/bands/services/bands.service");
 const albums_service_1 = require("./modules/albums/services/albums.service");
 const genres_service_1 = require("./modules/genres/services/genres.service");
+const tracks_service_1 = require("./modules/tracks/services/tracks.service");
 async function startApolloServer() {
     const app = (0, express_1.default)();
     app.use((0, cors_1.default)());
@@ -27,13 +29,15 @@ async function startApolloServer() {
             artists_resolver_1.artistsResolver,
             bands_resolver_1.bandsResolver,
             albums_resolver_1.albumsResolver,
-            geners_resolver_1.genresResolver,
+            genres_resolver_1.genresResolver,
+            tracks_resolver_1.tracksResolver,
         ],
         dataSources: () => ({
             artistsService: artists_service_1.artistsService,
             bandsService: bands_service_1.bandsService,
             albumsService: albums_service_1.albumsService,
             genresService: genres_service_1.genresService,
+            tracksService: tracks_service_1.tracksService,
         }),
         csrfPrevention: true,
         cache: 'bounded',

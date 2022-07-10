@@ -8,12 +8,14 @@ import 'dotenv/config';
 import { artistsResolver } from './modules/artists/resolvers/artists.resolver';
 import { bandsResolver } from './modules/bands/resolvers/bands.resolver';
 import { albumsResolver } from './modules/albums/resolvers/albums.resolver';
-import { genresResolver } from './modules/genres/resolvers/geners.resolver';
+import { genresResolver } from './modules/genres/resolvers/genres.resolver';
+import { tracksResolver } from './modules/tracks/resolvers/tracks.resolver';
 
 import { artistsService } from './modules/artists/services/artists.service';
 import { bandsService } from './modules/bands/services/bands.service';
 import { albumsService } from './modules/albums/services/albums.service';
 import { genresService } from './modules/genres/services/genres.service';
+import { tracksService } from './modules/tracks/services/tracks.service';
 
 async function startApolloServer() {
     const app = express();
@@ -28,12 +30,14 @@ async function startApolloServer() {
             bandsResolver,
             albumsResolver,
             genresResolver,
+            tracksResolver,
         ],
         dataSources: () => ({
             artistsService,
             bandsService,
             albumsService,
             genresService,
+            tracksService,
         }),
         csrfPrevention: true,
         cache: 'bounded',

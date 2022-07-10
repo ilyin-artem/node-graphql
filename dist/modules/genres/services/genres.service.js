@@ -8,7 +8,7 @@ class GenresService extends apollo_datasource_rest_1.RESTDataSource {
         this.baseURL = process.env.GENRES_URL;
     }
     getGenres() {
-        return this.get("/").then((res) => res.items.map((item) => ({
+        return this.get('/').then((res) => res.items.map((item) => ({
             ...item,
             id: item._id,
         })));
