@@ -14,11 +14,15 @@ const bands_resolver_1 = require("./modules/bands/resolvers/bands.resolver");
 const albums_resolver_1 = require("./modules/albums/resolvers/albums.resolver");
 const genres_resolver_1 = require("./modules/genres/resolvers/genres.resolver");
 const tracks_resolver_1 = require("./modules/tracks/resolvers/tracks.resolver");
+const user_resolver_1 = require("./modules/users/resolvers/user.resolver");
+const favorities_resolver_1 = require("./modules/favorites/resolvers/favorities.resolver");
 const artists_service_1 = require("./modules/artists/services/artists.service");
 const bands_service_1 = require("./modules/bands/services/bands.service");
 const albums_service_1 = require("./modules/albums/services/albums.service");
 const genres_service_1 = require("./modules/genres/services/genres.service");
 const tracks_service_1 = require("./modules/tracks/services/tracks.service");
+const user_service_1 = require("./modules/users/services/user.service");
+const favorities_service_1 = require("./modules/favorites/services/favorities.service");
 async function startApolloServer() {
     const app = (0, express_1.default)();
     app.use((0, cors_1.default)());
@@ -31,6 +35,8 @@ async function startApolloServer() {
             albums_resolver_1.albumsResolver,
             genres_resolver_1.genresResolver,
             tracks_resolver_1.tracksResolver,
+            user_resolver_1.userResolver,
+            favorities_resolver_1.favoritesResolver,
         ],
         dataSources: () => ({
             artistsService: artists_service_1.artistsService,
@@ -38,6 +44,8 @@ async function startApolloServer() {
             albumsService: albums_service_1.albumsService,
             genresService: genres_service_1.genresService,
             tracksService: tracks_service_1.tracksService,
+            userService: user_service_1.userService,
+            favoritesService: favorities_service_1.favoritesService,
         }),
         csrfPrevention: true,
         cache: 'bounded',
