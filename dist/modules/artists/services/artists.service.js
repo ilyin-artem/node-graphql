@@ -8,7 +8,7 @@ class ArtistsService extends apollo_datasource_rest_1.RESTDataSource {
         this.baseURL = process.env.ARTISTS_URL;
     }
     getArtists() {
-        return this.get("/").then((res) => res.items.map((item) => ({
+        return this.get('/').then((res) => res.items.map((item) => ({
             ...item,
             id: item._id,
             bands: item.bandsIds,
@@ -16,6 +16,9 @@ class ArtistsService extends apollo_datasource_rest_1.RESTDataSource {
     }
     getArtist(id) {
         return this.get(`/${id}`);
+    }
+    getArtistByIds(arrayIds) {
+        return Promise.allSettled(arrayIds.map((id) => this.getArtist(id)));
     }
 }
 exports.artistsService = new ArtistsService();

@@ -5,10 +5,15 @@ import cors from 'cors';
 import { loadFiles } from '@graphql-tools/load-files';
 import 'dotenv/config';
 
-import { ArtistsResolver } from './modules/artists/resolvers/artists.resolver';
-import { BandsResolver } from './modules/bands/resolvers/bands.resolver';
+import { artistsResolver } from './modules/artists/resolvers/artists.resolver';
+import { bandsResolver } from './modules/bands/resolvers/bands.resolver';
+import { albumsResolver } from './modules/albums/resolvers/albums.resolver';
+import { genresResolver } from './modules/genres/resolvers/geners.resolver';
+
 import { artistsService } from './modules/artists/services/artists.service';
 import { bandsService } from './modules/bands/services/bands.service';
+import { albumsService } from './modules/albums/services/albums.service';
+import { genresService } from './modules/genres/services/genres.service';
 
 async function startApolloServer() {
     const app = express();
@@ -18,10 +23,17 @@ async function startApolloServer() {
 
     const apolloServer = new ApolloServer({
         typeDefs: await loadFiles('src/**/*.graphql'),
-        resolvers: [ArtistsResolver, BandsResolver],
+        resolvers: [
+            artistsResolver,
+            bandsResolver,
+            albumsResolver,
+            genresResolver,
+        ],
         dataSources: () => ({
             artistsService,
             bandsService,
+            albumsService,
+            genresService,
         }),
         csrfPrevention: true,
         cache: 'bounded',

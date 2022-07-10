@@ -1,4 +1,4 @@
-export const ArtistsResolver = {
+export const artistsResolver = {
     Query: {
         artists: (_: any, __: any, { dataSources }: any) =>
             dataSources.artistsService.getArtists(),
@@ -6,4 +6,11 @@ export const ArtistsResolver = {
             dataSources.artistsService.getArtist(id),
     },
 
+    Artist: {
+        bands: (
+            { bandsIds }: { bandsIds: Array<string> },
+            _: any,
+            { dataSources }: any
+        ) => dataSources.bandsService.getBandsByIds(bandsIds),
+    },
 };

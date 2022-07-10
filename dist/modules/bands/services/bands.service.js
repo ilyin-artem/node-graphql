@@ -11,11 +11,16 @@ class BandsService extends apollo_datasource_rest_1.RESTDataSource {
         return this.get('/').then((res) => res.items.map((item) => ({
             ...item,
             id: item._id,
-            bands: item.bandId,
+            genres: item.genresIds,
         })));
     }
     getBand(id) {
         return this.get(`/${id}`);
+    }
+    getBandsByIds(arrayIds) {
+        return Promise.allSettled(arrayIds.map((id) => this.getBand(id))).then((res) => res.value
+            ? res.value
+            : []);
     }
 }
 exports.bandsService = new BandsService();

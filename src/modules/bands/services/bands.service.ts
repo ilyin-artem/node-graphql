@@ -11,13 +11,23 @@ class BandsService extends RESTDataSource {
             res.items.map((item: any) => ({
                 ...item,
                 id: item._id,
-                bands: item.bandId,
+                genres: item.genresIds,
             }))
         );
     }
 
     getBand(id: string) {
         return this.get(`/${id}`);
+    }
+
+    getBandsByIds(arrayIds: Array<string>) {
+        return Promise.allSettled(
+            arrayIds.map((id: string) => this.getBand(id))
+        ).then((res) =>
+            (res as unknown as PromiseFulfilledResult<any>).value
+                ? (res as unknown as PromiseFulfilledResult<any>).value
+                : []
+        );
     }
 }
 
