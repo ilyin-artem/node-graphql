@@ -7,20 +7,25 @@ const express_1 = __importDefault(require("express"));
 const apollo_server_express_1 = require("apollo-server-express");
 const apollo_server_core_1 = require("apollo-server-core");
 const cors_1 = __importDefault(require("cors"));
+const load_files_1 = require("@graphql-tools/load-files");
 require("dotenv/config");
+const artists_resolver_1 = require("./modules/artists/resolvers/artists.resolver");
+const bands_resolver_1 = require("./modules/bands/resolvers/bands.resolver");
+const artists_service_1 = require("./modules/artists/services/artists.service");
+const bands_service_1 = require("./modules/bands/services/bands.service");
 async function startApolloServer() {
     const app = (0, express_1.default)();
     app.use((0, cors_1.default)());
     app.use(express_1.default.json());
-    const typeDefs = (0, apollo_server_express_1.gql) `
-        type Query {
-            greetings: String
-        }
-    `;
-    const resolvers = {};
     const apolloServer = new apollo_server_express_1.ApolloServer({
-        typeDefs,
-        resolvers,
+        typeDefs: await (0, load_files_1.loadFiles)('src/**/*.graphql'),
+        resolvers: [artists_resolver_1.ArtistsResolver, bands_resolver_1.BandsResolver],
+        dataSources: () => ({
+            artistsService: artists_service_1.artistsService,
+            bandsService: bands_service_1.bandsService,
+        }),
+        csrfPrevention: true,
+        cache: 'bounded',
         plugins: [apollo_server_core_1.ApolloServerPluginLandingPageGraphQLPlayground],
     });
     await apolloServer.start();
