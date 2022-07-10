@@ -1,0 +1,32 @@
+{
+    "name": "05-node-graphql",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "start": "ts-node ./src/server.ts",
+        "start:dev": "nodemon -e ts  --exec \"npm run compile\"",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "compile": "tsc && node ./dist/server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ilyin-artem/node-graphql.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ilyin-artem/node-graphql/issues"
+    },
+    "homepage": "https://github.com/ilyin-artem/node-graphql#readme",
+    "dependencies": {
+        "apollo-server-express": "^3.9.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.1",
+        "express": "^4.18.1",
+        "nodemon": "^2.0.19",
+        "ts-node": "^10.8.2",
+        "typescript": "^4.7.4"
+    }
+}
